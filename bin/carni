@@ -1,0 +1,8 @@
+#!/usr/bin/env node
+const builder = require('../builder')
+
+const { _: [command] } = require('minimist')(process.argv.slice(2))
+const root = process.cwd()
+
+if (command === 'dev') builder('dev', root)
+else builder('prod', root)

@@ -1,0 +1,30 @@
+{
+  "name": "carni",
+  "version": "0.0.1",
+  "description": "Accessible & awesome text-based game engine.",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "bin": "./bin/carni",
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "find-root": "^1.1.0",
+    "fs-extra": "^10.1.0",
+    "html-webpack-plugin": "^5.5.0",
+    "minimist": "^1.2.6",
+    "vue": "^3.2.36",
+    "vue-loader": "^17.0.0",
+    "vue-router": "4",
+    "webpack": "^5.72.1",
+    "webpack-dev-server": "^4.9.1"
+  },
+  "devDependencies": {
+    "eslint": "^8.0.1",
+    "eslint-config-standard": "^17.0.0",
+    "eslint-plugin-import": "^2.25.2",
+    "eslint-plugin-n": "^15.0.0",
+    "eslint-plugin-promise": "^6.0.0",
+    "eslint-plugin-vue": "^9.1.0"
+  }
+}
