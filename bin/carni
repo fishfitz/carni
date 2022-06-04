@@ -1,8 +1,10 @@
 #!/usr/bin/env node
 const builder = require('../builder')
+const create = require('../create')
 
-const { _: [command] } = require('minimist')(process.argv.slice(2))
+const { _: [command, target] } = require('minimist')(process.argv.slice(2))
 const root = process.cwd()
 
 if (command === 'dev') builder('dev', root)
+else if (command === 'create') create(target)
 else builder('prod', root)

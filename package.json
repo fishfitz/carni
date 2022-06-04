@@ -1,6 +1,6 @@
 {
   "name": "carni",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Accessible & awesome text-based game engine.",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -15,6 +15,7 @@
     "html-webpack-plugin": "^5.5.0",
     "minimist": "^1.2.6",
     "pinia": "^2.0.14",
+    "sao": "^1.7.1",
     "screenfull": "^6.0.1",
     "squirrelly": "^8.0.8",
     "vue": "^3.2.36",
