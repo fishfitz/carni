@@ -9,5 +9,5 @@ export default createRouter({
       path: `/${name}`,
       component: ctx.keys().map(ctx)[component].default
     }]
-  }, []))(require.context('~root/views', true, /\.vue$/))
+  }, []))(require.context('~root/game/views', true, /\.vue$/))
 })

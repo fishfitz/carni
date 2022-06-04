@@ -24,28 +24,30 @@ module.exports = function (source) {
         }
 
         if (line[0] === '$') return { condition, type: 'code', code: line.slice(1).trim() }
-        if (line.slice(0, 3) === '>>>') {
-          const scene = line.slice(3)
-          return {
-            condition,
-            type: 'code',
-            code: `GOTO('${scene.split(',')[0] || id}', ${scene.split(',')[1]})`
-          }
-        }
         if (line.slice(0, 2) === '>>') {
           const scenes = line.match(/>>\S+/g)
-          return {
+          console.log(scenes)
+          const choice = {
             condition,
             type: 'choice',
             choices: line
               .split(/>>\S+/)
-              .filter((a) => a)
               .map((text, i) => ({
                 text: text.trim(),
-                scene: scenes[i].replace('>>', '').split(',')[0] || id,
-                line: scenes[i].split(',')[1]
+                scene: scenes[i]?.replace('>>', '')?.split(',')?.[0],
+                line: scenes[i]?.split(',')?.[1]
               }))
+              .filter(c => c.scene)
           }
+
+          if (choice.choices.length === 1 && !choice.choices[0].text) {
+            return {
+              condition,
+              type: 'code',
+              code: `GOTO('${choice.choices[0].scene}', ${choice.choices[0].line})`
+            }
+          }
+          return choice
         }
 
         let speaker = null

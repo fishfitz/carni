@@ -1,5 +1,5 @@
 <template>
-  <router-link :to="{ name: to }">
+  <router-link :to="{ name: to }" tabindex="0">
     <slot/>
   </router-link>
 </template>

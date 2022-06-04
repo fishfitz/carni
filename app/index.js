@@ -4,7 +4,8 @@ import { RouterView } from 'vue-router'
 
 import router from './router'
 import importComponents from './components'
-import './store/game'
+import importStore from './store'
+import importHotkeys from './hotkeys'
 import config from '~root/carni.config'
 
 const app = createApp({
@@ -18,6 +19,9 @@ const app = createApp({
 })
 
 importComponents(app)
+importStore(app)
+importHotkeys()
+
 app.use(router)
 app.mount('body')
 
