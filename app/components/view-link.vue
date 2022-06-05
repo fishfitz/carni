@@ -1,5 +1,5 @@
 <template>
-  <router-link :to="{ name: to }" tabindex="0">
+  <router-link :to="{ name: to }" tabindex="0" aria-roledescription=" ">
     <slot/>
   </router-link>
 </template>

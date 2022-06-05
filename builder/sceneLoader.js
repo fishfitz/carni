@@ -26,18 +26,18 @@ module.exports = function (source) {
         if (line[0] === '$') return { condition, type: 'code', code: line.slice(1).trim() }
         if (line.slice(0, 2) === '>>') {
           const scenes = line.match(/>>\S+/g)
-          console.log(scenes)
+          console.log(line, scenes)
           const choice = {
             condition,
             type: 'choice',
             choices: line
               .split(/>>\S+/)
+              .slice(1)
               .map((text, i) => ({
                 text: text.trim(),
                 scene: scenes[i]?.replace('>>', '')?.split(',')?.[0],
                 line: scenes[i]?.split(',')?.[1]
               }))
-              .filter(c => c.scene)
           }
 
           if (choice.choices.length === 1 && !choice.choices[0].text) {

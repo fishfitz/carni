@@ -14,10 +14,11 @@ const speakers = require('~root/game/speakers')
 const newGame = {
   sceneId: config.firstScene || 'start',
   lineIndex: 0,
-  choices: null,
   journal: [],
   isNewGame: true
 }
+
+console.log(scenes)
 
 let story
 export default () => {
@@ -33,7 +34,13 @@ export default () => {
 
       getters: {
         line () {
-          return this.scenes[this.sceneId]?.lines[this.lineIndex] || {}
+          const line = this.scenes[this.sceneId]?.lines[this.lineIndex] || {}
+          return {
+            ...line,
+            text: line.text ? render(line.text, this.$world) : undefined,
+            speaker: line.speaker ? { id: line.speaker, ...speakers[line.speaker] } : undefined,
+            choices: line.choices ? line.choices.map(c => ({ ...c, text: render(c.text, this.$world) })) : undefined
+          }
         }
       },
 
@@ -64,22 +71,16 @@ export default () => {
               this.lineIndex++
               return this.resolve()
             }
-          } else if (line.type === 'choice') this.choices = line.choices
+          }
           this.updateJournal()
         },
         pickChoice (choice) {
-          this.choices = null
           this.journal.push({ text: choice.text, type: 'choice' })
           this.goto(choice.scene, choice.line)
         },
         updateJournal () {
           if (this.line.type !== 'text') return
-
-          this.journal.push({
-            ...this.line,
-            text: this.line.text ? render(this.line.text, this.$world) : undefined,
-            speaker: this.line.speaker ? { id: this.line.speaker, ...speakers[this.line.speaker] } : undefined
-          })
+          this.journal.push(JSON.parse(JSON.stringify(this.line)))
         },
         next () {
           if (this.line.type === 'text') {
