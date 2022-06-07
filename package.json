@@ -1,14 +1,15 @@
 {
-  "name": "carni",
+  "name": "carni-audio",
   "version": "0.0.2",
   "description": "Accessible & awesome text-based game engine.",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "bin": "./bin/carni",
-  "author": "",
+  "author": "FitzFish",
   "license": "ISC",
   "dependencies": {
+    "file-loader": "^6.2.0",
     "find-root": "^1.1.0",
     "fs-extra": "^10.1.0",
     "hotkeys-js": "^3.9.4",

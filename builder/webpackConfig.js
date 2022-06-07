@@ -8,7 +8,8 @@ module.exports = ({ mode, projectRoot, carniConfig }) => {
     module: {
       rules: [
         { test: /\.ni$/, use: [{ loader: path.resolve(__dirname, './sceneLoader.js') }] },
-        { test: /\.vue$/, use: [{ loader: require.resolve('vue-loader') }] }
+        { test: /\.vue$/, use: [{ loader: require.resolve('vue-loader') }] },
+        { test: /\.mp3$/, type: 'asset/resource' }
       ]
     },
     resolve: {

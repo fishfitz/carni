@@ -8,6 +8,21 @@ import importStore from './store'
 import importHotkeys from './hotkeys'
 import config from '~root/carni.config'
 
+const pluginFunctions = {}
+const pluginVariables = {}
+const pluginSetup = []
+
+config.plugins?.forEach((plugin) => {
+  if (plugin.default) plugin = plugin.default
+  const pluginData = plugin()
+  const { setup = () => {}, functions = {}, variables = {} } = pluginData
+  Object.assign(pluginFunctions, functions)
+  Object.assign(pluginVariables, variables)
+  pluginSetup.push((app) => {
+    setup(app)
+  })
+})
+
 const app = createApp({
   components: { RouterView },
   created () {
@@ -19,10 +34,13 @@ const app = createApp({
 })
 
 importComponents(app)
-importStore(app)
+importStore(app, { pluginFunctions, pluginVariables })
 importHotkeys()
 
 app.use(router)
+
+pluginSetup.forEach(f => f(app))
+
 app.mount('body')
 
 export default () => {}

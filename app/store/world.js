@@ -7,13 +7,15 @@ const variables = require('~root/game/variables')
 const functions = require('~root/game/functions')
 
 let world
-export default () => {
+export default ({ pluginVariables, pluginFunctions } = {}) => {
+  console.log('...!!!', pluginFunctions)
   if (!world) {
     world = defineStore({
       id: 'world',
 
       state: () => {
         return {
+          ...pluginVariables,
           ...JSON.parse(JSON.stringify(variables)),
           $STORY: story(),
           $UI: ui()
@@ -32,6 +34,7 @@ export default () => {
         VIEW (view) {
           router.push(view)
         },
+        ...pluginFunctions,
         ...functions
       }
     })()
