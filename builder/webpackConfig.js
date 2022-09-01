@@ -1,4 +1,5 @@
 const path = require('path')
+const webpack = require('webpack')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const { VueLoaderPlugin } = require('vue-loader')
 
@@ -9,7 +10,9 @@ module.exports = ({ mode, projectRoot, carniConfig }) => {
       rules: [
         { test: /\.ni$/, use: [{ loader: path.resolve(__dirname, './sceneLoader.js') }] },
         { test: /\.vue$/, use: [{ loader: require.resolve('vue-loader') }] },
-        { test: /\.mp3$/, type: 'asset/resource' }
+        { test: /\.(mp3|png|jpg|gif|woff|woff2|eot|ttf|svg)$/, type: 'asset' },
+        { test: /\.css$/i, use: ['vue-style-loader', 'css-loader'] },
+        { test: /\.s[ac]ss$/i, use: ['vue-style-loader', 'css-loader', 'sass-loader'] }
       ]
     },
     resolve: {
@@ -27,6 +30,10 @@ module.exports = ({ mode, projectRoot, carniConfig }) => {
   }
 
   if (mode === 'prod') {
+    config.plugins.push(new webpack.DefinePlugin({
+      __VUE_PROD_DEVTOOLS__: false
+    }))
+
     return {
       name: 'prod',
       mode: 'production',

@@ -8,7 +8,6 @@ const functions = require('~root/game/functions')
 
 let world
 export default ({ pluginVariables, pluginFunctions } = {}) => {
-  console.log('...!!!', pluginFunctions)
   if (!world) {
     world = defineStore({
       id: 'world',
@@ -25,7 +24,6 @@ export default ({ pluginVariables, pluginFunctions } = {}) => {
       actions: {
         NEW_GAME () {
           this.$patch(JSON.parse(JSON.stringify(variables)))
-          console.log(this.$STORY)
           this.$STORY.newGame()
         },
         GOTO (...args) {

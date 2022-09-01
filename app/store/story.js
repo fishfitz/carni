@@ -18,8 +18,6 @@ const newGame = {
   isNewGame: true
 }
 
-console.log(scenes)
-
 let story
 export default () => {
   if (!story) {

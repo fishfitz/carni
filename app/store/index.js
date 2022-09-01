@@ -4,7 +4,6 @@ import world from './world'
 import ui from './ui'
 
 export default (app, { pluginFunctions, pluginVariables }) => {
-  console.log('!', pluginVariables, pluginFunctions)
   app.use(createPinia())
 
   const worldInstance = world({ pluginFunctions, pluginVariables })

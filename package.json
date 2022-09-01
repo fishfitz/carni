@@ -1,6 +1,6 @@
 {
-  "name": "carni-audio",
-  "version": "0.0.2",
+  "name": "carni",
+  "version": "0.0.12",
   "description": "Accessible & awesome text-based game engine.",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -9,19 +9,23 @@
   "author": "FitzFish",
   "license": "ISC",
   "dependencies": {
+    "css-loader": "^6.7.1",
     "file-loader": "^6.2.0",
     "find-root": "^1.1.0",
     "fs-extra": "^10.1.0",
     "hotkeys-js": "^3.9.4",
     "html-webpack-plugin": "^5.5.0",
     "minimist": "^1.2.6",
+    "node-sass": "^7.0.1",
     "pinia": "^2.0.14",
     "sao": "^1.7.1",
+    "sass-loader": "^13.0.2",
     "screenfull": "^6.0.1",
     "squirrelly": "^8.0.8",
     "vue": "^3.2.36",
     "vue-loader": "^17.0.0",
     "vue-router": "4",
+    "vue-style-loader": "^4.1.3",
     "webpack": "^5.72.1",
     "webpack-dev-server": "^4.9.1"
   },
