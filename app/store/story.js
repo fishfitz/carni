@@ -1,3 +1,4 @@
+import clone from 'just-clone'
 import { defineStore } from 'pinia'
 
 import evalCode from '../utils/eval'
@@ -78,7 +79,7 @@ export default () => {
         },
         updateJournal () {
           if (this.line.type !== 'text') return
-          this.journal.push(JSON.parse(JSON.stringify(this.line)))
+          this.journal.push(clone(this.line))
         },
         next () {
           if (this.line.type === 'text') {

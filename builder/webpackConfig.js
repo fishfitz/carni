@@ -8,23 +8,57 @@ module.exports = ({ mode, projectRoot, carniConfig }) => {
     entry: path.resolve(__dirname, '../app/index.js'),
     module: {
       rules: [
-        { test: /\.ni$/, use: [{ loader: path.resolve(__dirname, './sceneLoader.js') }] },
-        { test: /\.vue$/, use: [{ loader: require.resolve('vue-loader') }] },
-        { test: /\.(mp3|png|jpg|gif|woff|woff2|eot|ttf|svg)$/, type: 'asset' },
-        { test: /\.css$/i, use: ['vue-style-loader', 'css-loader'] },
-        { test: /\.s[ac]ss$/i, use: ['vue-style-loader', 'css-loader', 'sass-loader'] }
+        {
+          test: /\.ni$/,
+          use: [{ loader: path.resolve(__dirname, './sceneLoader.js') }]
+        },
+        {
+          test: /\.vue$/,
+          use: [{
+            loader: require.resolve('vue-loader'),
+            options: {
+              reactivityTransform: true
+            }
+          }]
+        },
+        {
+          test: /\.(mp3|png|jpg|gif|woff|woff2|eot|ttf|svg)$/,
+          type: 'asset'
+        },
+        {
+          test: /\.css$/i,
+          use: [
+            require.resolve('vue-style-loader'),
+            require.resolve('css-loader')
+          ]
+        },
+        {
+          test: /\.s[ac]ss$/i,
+          use: [
+            require.resolve('vue-style-loader'),
+            require.resolve('css-loader'),
+            require.resolve('sass-loader')
+          ]
+        }
       ]
     },
     resolve: {
       alias: {
         '~root': projectRoot,
+        '~carni/render': require.resolve('../app/utils/render'),
         vue: require.resolve(`vue/dist/vue.esm-browser${mode === 'prod' ? '.prod' : ''}.js`)
       }
     },
     plugins: [
       new VueLoaderPlugin(),
+      require('unplugin-auto-import/webpack')({
+        imports: ['vue']
+      }),
       new HtmlWebpackPlugin({
         title: carniConfig.title
+      }),
+      new webpack.DefinePlugin({
+        __BUILD_MODE__: JSON.stringify(mode)
       })
     ]
   }

@@ -26,7 +26,7 @@ module.exports = function (source) {
         if (line[0] === '$') return { condition, type: 'code', code: line.slice(1).trim() }
         if (line.slice(0, 2) === '>>') {
           const scenes = line.match(/>>\S+/g)
-          console.log(line, scenes)
+
           const choice = {
             condition,
             type: 'choice',

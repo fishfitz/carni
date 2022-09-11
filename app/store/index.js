@@ -8,12 +8,15 @@ export default (app, { pluginFunctions, pluginVariables }) => {
 
   const worldInstance = world({ pluginFunctions, pluginVariables })
   app.config.globalProperties.$world = worldInstance
+  window.$world = worldInstance
 
   const storyInstance = story()
   storyInstance.updateJournal()
   storyInstance.resolve()
   app.config.globalProperties.$story = storyInstance
+  window.$story = storyInstance
 
   const uiInstance = ui()
   app.config.globalProperties.$ui = uiInstance
+  window.$ui = uiInstance
 }

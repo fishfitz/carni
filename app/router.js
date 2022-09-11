@@ -1,7 +1,9 @@
-import { createRouter, createMemoryHistory } from 'vue-router'
+/* global __BUILD_MODE__ */
+
+import { createRouter, createWebHashHistory, createMemoryHistory } from 'vue-router'
 
 export default createRouter({
-  history: createMemoryHistory(),
+  history: __BUILD_MODE__ === 'prod' ? createMemoryHistory() : createWebHashHistory(),
   routes: (ctx => ctx.keys().reduce((acc, route, component) => {
     const name = route.replace(/^\.\//, '').replace(/\.vue$/, '')
     return [...acc, {
