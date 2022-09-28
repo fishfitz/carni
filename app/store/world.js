@@ -23,6 +23,9 @@ export default ({ pluginVariables, pluginFunctions } = {}) => {
       },
 
       actions: {
+        DEBUG: () => {
+          console.log(JSON.parse(JSON.stringify({ ...this, $UI: undefined, $STORY: undefined })))
+        },
         NEW_GAME () {
           this.$patch(clone(variables))
           this.$STORY.newGame()

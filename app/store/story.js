@@ -44,6 +44,9 @@ export default () => {
       },
 
       actions: {
+        DEBUG: () => {
+          console.log(JSON.parse(JSON.stringify({ ...this, $UI: undefined, $WORLD: undefined })))
+        },
         newGame () {
           this.$patch({ ...newGame })
           this.updateJournal()
