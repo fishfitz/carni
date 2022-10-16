@@ -84,6 +84,30 @@ export default () => {
           if (this.line.type !== 'text') return
           this.journal.push(clone(this.line))
         },
+        speak (text, nextSceneId, nextLineIndex) {
+          const oldSceneId = this.sceneId
+          const oldLineIndex = this.lineIndex
+
+          this.sceneId = '__speak__'
+          this.lineIndex = 0
+          this.scenes.__speak__ = {
+            id: '__speak__',
+            lines: [{
+              type: 'text',
+              text
+            }]
+          }
+
+          return new Promise((resolve) => {
+            this.scenes.__speak__.lines.push({
+              type: 'code',
+              code: () => {
+                this.goto(nextSceneId ?? oldSceneId, nextLineIndex ?? oldLineIndex)
+                resolve()
+              }
+            })
+          })
+        },
         next () {
           if (this.line.type === 'text') {
             this.isNewGame = false
