@@ -45,7 +45,7 @@ const getTabContext = () => {
 
 const firstElementToFocus = ({ group, activeElementIndex, keepColumn }) => {
   if (keepColumn && group.elements[activeElementIndex]) return activeElementIndex
-  if (group.hasAttribute('tabstartlast') && group.elements.length) return group.length - 1
+  if (group.hasAttribute('tabstartlast') && group.elements.length) return group.elements.length - 1
   return 0
 }
 
