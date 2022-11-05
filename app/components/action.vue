@@ -1,7 +1,7 @@
 <template>
-  <a :tabindex="disabled ? -1 : 0" aria-roledescription=" " v-bind="$props" ref="element" class="__action__">
+  <button :tabindex="disabled ? -1 : 0" aria-roledescription=" " role="presentation" v-bind="$props" ref="element" class="__action__">
     <slot/>
-  </a>
+  </button>
 </template>
 
 <script setup>

@@ -1,6 +1,6 @@
 {
   "name": "carni",
-  "version": "0.0.16",
+  "version": "0.0.17",
   "description": "Accessible & awesome text-based game engine.",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -9,7 +9,9 @@
   "author": "FitzFish",
   "license": "ISC",
   "dependencies": {
+    "console.history": "^1.5.2",
     "css-loader": "^6.7.1",
+    "downloadjs": "^1.4.7",
     "file-loader": "^6.2.0",
     "find-root": "^1.1.0",
     "fs-extra": "^10.1.0",

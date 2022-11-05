@@ -1,8 +1,6 @@
 import clone from 'just-clone'
 import { defineStore } from 'pinia'
 import router from '../router'
-import story from './story'
-import ui from './ui'
 
 import variables from '~root/game/variables'
 import functions from '~root/game/functions'
@@ -16,22 +14,21 @@ export default ({ pluginVariables, pluginFunctions } = {}) => {
       state: () => {
         return {
           ...pluginVariables,
-          ...clone(variables),
-          $STORY: story(),
-          $UI: ui()
+          ...clone(variables)
         }
       },
 
       actions: {
         DEBUG: () => {
-          console.log(JSON.parse(JSON.stringify({ ...this, $UI: undefined, $STORY: undefined })))
+          return JSON.parse(JSON.stringify({ ...window.$world }))
         },
         NEW_GAME () {
           this.$patch(clone(variables))
-          this.$STORY.newGame()
+          window.$story.newGame()
         },
         GOTO (...args) {
-          this.$STORY.goto(...args)
+          console.log('Goto:', ...args)
+          window.$story.goto(...args)
         },
         VIEW (view) {
           router.push(view)

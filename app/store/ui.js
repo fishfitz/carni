@@ -1,5 +1,6 @@
 import { defineStore } from 'pinia'
 import screenfull from 'screenfull'
+import download from 'downloadjs'
 
 const getTabContext = () => {
   const tabgroups = [...document.querySelectorAll('[tabgroup]')]
@@ -61,7 +62,7 @@ export default () => {
 
       actions: {
         DEBUG: () => {
-          console.log(JSON.parse(JSON.stringify({ ...this, $WORLD: undefined, $STORY: undefined })))
+          return JSON.parse(JSON.stringify({ ...window.$ui }))
         },
         fullscreen () {
           screenfull.request()
@@ -70,7 +71,7 @@ export default () => {
         focus (el) {
           setTimeout(() => {
             if (typeof el === 'string') el = document.querySelector(el)
-            el.focus()
+            if (el) el.focus()
           }, 1)
         },
         focusNextGroup () {
@@ -108,6 +109,17 @@ export default () => {
 
             group.elements[(activeElementIndex - 1) || 0]?.focus()
           }, 1)
+        },
+        downloadLogs () {
+          const history = console.history
+            .map(l => `${l.type} ${new Date(l.timestamp).toISOString().split('.')[0]} - ${[...l.arguments].join(' ')}\n${l.stack.join('\n\t')}`)
+            .join('\n\n')
+          const p = value => JSON.stringify(value.DEBUG())
+          download(
+            `${p(window.$world)}\n\n***\n\n${p(window.$ui)}\n\n***\n\n${p(window.$story)}\n\n***\n\n${history} `,
+            `luminio ${new Date().toISOString()}.txt`,
+            'text/plain'
+          )
         }
       }
     })()

@@ -1,3 +1,4 @@
+import 'console.history'
 import { createApp, h } from 'vue'
 
 import router from './router'

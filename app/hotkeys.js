@@ -7,7 +7,7 @@ export default () => {
     hotkeys('*', () => {
     })
     hotkeys(key, event => {
-      console.log(key)
+      console.info('Hotkey:', key)
       event.preventDefault()
       handler(world())
     })

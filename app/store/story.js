@@ -45,7 +45,7 @@ export default () => {
 
       actions: {
         DEBUG: () => {
-          console.log(JSON.parse(JSON.stringify({ ...this, $UI: undefined, $WORLD: undefined })))
+          return JSON.parse(JSON.stringify({ ...window.$story, $world: undefined, scenes: undefined }))
         },
         newGame () {
           this.$patch({ ...newGame })
@@ -68,7 +68,6 @@ export default () => {
           }
           if (line.type === 'code') {
             evalCode(this.$world, line.code)
-
             if (this.line.type === 'code') {
               this.lineIndex++
               return this.resolve()
@@ -102,7 +101,7 @@ export default () => {
             this.scenes.__speak__.lines.push({
               type: 'code',
               code: () => {
-                this.goto(nextSceneId ?? oldSceneId, nextLineIndex ?? oldLineIndex)
+                this.goto(nextSceneId ?? oldSceneId, nextLineIndex ?? oldLineIndex + 1)
                 resolve()
               }
             })

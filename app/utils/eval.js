@@ -3,7 +3,7 @@
 export default (world, code) => typeof code === 'function'
   ? code()
   : new Function('world', 'code', `
-    console.log('Reading', code)
+    console.log('Script:', code)
     with (world) {
       return eval(\`\${code}\`)
     }
