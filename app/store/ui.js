@@ -62,7 +62,7 @@ export default () => {
 
       actions: {
         DEBUG: () => {
-          return JSON.parse(JSON.stringify({ ...window.$ui }))
+          return JSON.parse(JSON.stringify({ ...window.$ui, _p: undefined }))
         },
         fullscreen () {
           screenfull.request()

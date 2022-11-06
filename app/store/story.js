@@ -45,7 +45,7 @@ export default () => {
 
       actions: {
         DEBUG: () => {
-          return JSON.parse(JSON.stringify({ ...window.$story, $world: undefined, scenes: undefined }))
+          return JSON.parse(JSON.stringify({ ...window.$story, $world: undefined, scenes: undefined, _p: undefined }))
         },
         newGame () {
           this.$patch({ ...newGame })

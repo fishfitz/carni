@@ -20,7 +20,7 @@ export default ({ pluginVariables, pluginFunctions } = {}) => {
 
       actions: {
         DEBUG: () => {
-          return JSON.parse(JSON.stringify({ ...window.$world }))
+          return JSON.parse(JSON.stringify({ ...window.$world, _p: undefined }))
         },
         NEW_GAME () {
           this.$patch(clone(variables))
