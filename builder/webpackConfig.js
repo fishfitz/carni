@@ -26,6 +26,10 @@ module.exports = ({ mode, projectRoot, carniConfig }) => {
           type: 'asset'
         },
         {
+          test: /\.bms/,
+          type: 'asset/source'
+        },
+        {
           test: /\.css$/i,
           use: [
             require.resolve('vue-style-loader'),
@@ -58,7 +62,9 @@ module.exports = ({ mode, projectRoot, carniConfig }) => {
         title: carniConfig.title
       }),
       new webpack.DefinePlugin({
-        __BUILD_MODE__: JSON.stringify(mode)
+        __BUILD_MODE__: JSON.stringify(mode),
+        'process.env.NODE_ENV': JSON.stringify(mode === 'prod' ? 'production' : 'development'),
+        'process.env.NODE_DEBUG': false
       })
     ]
   }
