@@ -64,8 +64,8 @@ export default () => {
         DEBUG: () => {
           return JSON.parse(JSON.stringify({ ...window.$ui, _p: undefined }))
         },
-        fullscreen () {
-          screenfull.request()
+        fullscreen (element) {
+          screenfull.request(element)
           this.isFullscreen = screenfull.isFullscreen
         },
         focus (el) {
