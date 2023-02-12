@@ -4,7 +4,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 const { VueLoaderPlugin } = require('vue-loader')
 
 module.exports = ({ mode, projectRoot, carniConfig }) => {
-  const config = {
+  let config = {
     entry: path.resolve(__dirname, '../app/index.js'),
     module: {
       rules: [
@@ -74,6 +74,8 @@ module.exports = ({ mode, projectRoot, carniConfig }) => {
       __VUE_PROD_DEVTOOLS__: false
     }))
 
+    if (carniConfig.build) config = carniConfig.build(config)
+
     return {
       name: 'prod',
       mode: 'production',
@@ -84,6 +86,8 @@ module.exports = ({ mode, projectRoot, carniConfig }) => {
       ...config
     }
   }
+
+  if (carniConfig.build) config = carniConfig.build(config)
 
   return {
     name: 'dev',

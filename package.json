@@ -1,6 +1,6 @@
 {
   "name": "carni",
-  "version": "0.0.20",
+  "version": "0.0.21",
   "description": "Accessible & awesome text-based game engine.",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
