@@ -5,6 +5,7 @@ import router from './router'
 import importComponents from './components'
 import importStore from './store'
 import importHotkeys from './hotkeys'
+import importDirectives from './directives'
 
 import config from '~root/carni.config'
 import appView from '~root/game/app.vue'
@@ -31,6 +32,7 @@ const app = createApp({
   render: () => h(appView)
 })
 
+importDirectives(app)
 importComponents(app)
 importStore(app, { pluginFunctions, pluginVariables })
 importHotkeys()

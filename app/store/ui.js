@@ -3,9 +3,16 @@ import screenfull from 'screenfull'
 import download from 'downloadjs'
 
 const getTabContext = () => {
-  const tabgroups = [...document.querySelectorAll('[tabgroup]')]
+  // Get all elements with tabgroup not false
+  const tabgroups = [...document.querySelectorAll('[tabgroup]:not([tabgroup="false"])')]
+
+  // Add as singleton group each element with tabindex that is not in a group
+  /*
   const groups = [...document.querySelectorAll('[tabindex]')]
     .filter(group => !tabgroups.some(ge => ge.contains(group) && !ge.isSameNode(group)))
+  */
+
+  const groups = []
 
   groups.push(...tabgroups)
 
@@ -22,7 +29,7 @@ const getTabContext = () => {
   groups.forEach((group, groupIndex) => {
     const elements = []
 
-    if (group.hasAttribute('tabindex')) elements.push(group)
+    // if (group.hasAttribute('tabindex')) elements.push(group)
     elements.push(...group.querySelectorAll('[tabindex]'))
 
     elements.forEach((element, elementIndex) => {
@@ -72,6 +79,15 @@ export default () => {
           setTimeout(() => {
             if (typeof el === 'string') el = document.querySelector(el)
             if (el) el.focus()
+          }, 1)
+        },
+        focusFirstGroup () {
+          setTimeout(() => {
+            const { groups, activeElementIndex, keepColumn } = getTabContext()
+            const group = groups[0]
+            if (!group) return
+
+            group.elements[firstElementToFocus({ group, activeElementIndex, keepColumn })]?.focus()
           }, 1)
         },
         focusNextGroup () {

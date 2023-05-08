@@ -1,7 +1,11 @@
 <template>
-  <button :tabindex="disabled ? -1 : 0" aria-roledescription=" " role="presentation" v-bind="$props" ref="element" class="__action__">
+  <span
+    v-bind="$props"
+    ref="element"
+    class="__action__"
+  >
     <slot/>
-  </button>
+  </span>
 </template>
 
 <script setup>
@@ -24,12 +28,15 @@ if (props.autofocus) {
 
 <style lang="scss" scoped>
 .__action__ {
+  display: inline-block;
+  box-sizing: border-box;
+
   &:focus-visible {
     outline: none;
   }
 
   &:focus {
-    border: 1px solid red;
+    border: 10px solid red;
   }
 }
 </style>
